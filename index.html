@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Học Viện Giả Lập Lỗ Hổng Web</title>
+    <style>
+        body { font-family: sans-serif; margin: 20px; background: #1a1a1a; color: #fff; }
+        .box { background: #2d2d2d; padding: 15px; margin-bottom: 15px; border-radius: 6px; border-left: 5px solid #ff4757; }
+        input, textarea { width: 100%; padding: 8px; margin: 5px 0; background: #1e1e1e; border: 1px solid #444; color: #fff; box-sizing: border-box; }
+        button { background: #ff4757; color: white; border: none; padding: 8px 12px; cursor: pointer; font-weight: bold; }
+        .output { background: #1e1e1e; padding: 10px; margin-top: 10px; min-height: 20px; word-break: break-all; }
+        pre { margin: 0; white-space: pre-wrap; color: #00ff00; }
+    </style>
+</head>
+<body>
+
+    <h1 style="text-align: center; color: #2ed573;">Môi Trường Luyện Hack Giả Lập</h1>
+
+    <!-- XSS -->
+    <div class="box">
+        <h2>1. Reflected & DOM XSS</h2>
+        <input type="text" id="xss_input" placeholder="Nhập payload ví dụ: <img src=x onerror=alert('Hacked')>">
+        <button onclick="runXss()">Tấn công XSS</button>
+        <div class="output">Kết quả: <div id="xss_output"></div></div>
+    </div>
+
+    <!-- STORED XSS -->
+    <div class="box">
+        <h2>2. Stored XSS</h2>
+        <textarea id="stored_input" placeholder="Nhập bình luận độc hại..."></textarea>
+        <button onclick="saveStoredXss()">Lưu vào hệ thống</button>
+        <button onclick="clearStoredXss()" style="background: #555;">Xóa bộ nhớ</button>
+        <div class="output">Bình luận đã lưu: <div id="stored_output"></div></div>
+    </div>
+
+    <!-- SQL INJECTION -->
+    <div class="box">
+        <h2>3. SQL Injection (Mô phỏng)</h2>
+        <input type="text" id="sqli_input" placeholder="Payload: 1' OR '1'='1">
+        <button onclick="runSqlInjection()">Gửi Query SQL</button>
+        <div class="output">Dữ liệu trả về: <div id="sqli_output"></div></div>
+    </div>
+
+    <!-- LFI -->
+    <div class="box">
+        <h2>4. File Inclusion (LFI)</h2>
+        <input type="text" id="lfi_input" placeholder="Thử nhập: secret_config.txt hoặc passwd">
+        <button onclick="runLfi()">Đọc File</button>
+        <div class="output">Nội dung: <pre id="lfi_output"></pre></div>
+    </div>
+
+    <!-- COMMAND INJECTION -->
+    <div class="box">
+        <h2>5. Command Injection</h2>
+        <input type="text" id="cmd_input" placeholder="Payload: 8.8.8.8 & whoami">
+        <button onclick="runCommandInjection()">Chạy lệnh Shell</button>
+        <div class="output">Terminal: <pre id="cmd_output"></pre></div>
+    </div>
+
+    <!-- CSRF -->
+    <div class="box">
+        <h2>6. CSRF (Mô phỏng)</h2>
+        <p>Mật khẩu hiện tại: <span id="current_pw" style="color: #ff4757; font-weight: bold;">123456</span></p>
+        <button onclick="runCsrfAttack()" style="background: #ffa502;">Bấm vào link trúng thưởng giả lập dính CSRF</button>
+    </div>
+
+    <!-- Nhúng file gánh logic ở đây -->
+    <script src="script.js"></script>
+</body>
+</html>
